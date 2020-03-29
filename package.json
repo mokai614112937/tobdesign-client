@@ -59,7 +59,7 @@
     "url-loader": "^0.6.2",
     "vue-loader": "15.2.4",
     "vue-template-compiler": "2.5.x",
-    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-bundle-analyzer": "^3.3.2",
     "yargs": "^10.0.3"
   },
   "license": "ISC"
