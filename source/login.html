@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="renderer" content="webkit"/>
+  <title>todesign后台管理系统</title>
+  <link rel="shortcut icon" href="./assets/images/favicon.ico">
+  <link rel="stylesheet" href="./assets/css/normalize.css"/>
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./assets/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="./assets/css/element-icon-font-awesome.css"/>
+  <link rel="stylesheet" href="./assets/css/element-ui.theme-green.css"/>
+  <link rel="stylesheet" href="./assets/css/default.css"/>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+      background-color: #0e61bc;
+      margin: 0px;
+    }
+
+    .flex {
+      display: flex;
+      height: 100%;
+      align-items: center;
+      background: url(assets/images/one-bg.png) repeat-x center bottom;
+      background-size: 100%;
+    }
+
+    .logo {
+      position: absolute;
+      top: 35px;
+      left: 35px;
+    }
+
+    .login {
+      flex-basis: 300px;
+      align-self: center;
+    }
+
+    .appender {
+      flex: 1;
+    }
+
+    .row {
+      margin: 20px;
+    }
+
+    .prepend {
+      width: 30px;
+      text-align: center;
+    }
+
+    .welcome {
+      color: white;
+      font-family: "Hiragino Sans GB", "冬青黑体简体中文", "Microsoft YaHei", "微软雅黑";
+      margin-bottom: 30px;
+    }
+
+    .license-info {
+      width: 100%;
+      line-height: 32px;
+      position: absolute;
+      left: 0;
+      bottom: 15px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .license-info .license-date {
+      font-weight: bold;
+    }
+
+    .license-info a {
+      color: #ffd;
+      margin: 0 5px
+    }
+
+    .license-info a:hover {
+      color: #e6a23c
+    }
+
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+<div id="app" class="flex">
+  <div class="logo">
+    <!--<img src="assets/images/product/logo.png">-->
+    <img src="assets/images/product/system-logo.png" style="max-width: 150px;margin-left: 20px;">
+  </div>
+  <div class="appender"></div>
+  <div class="login">
+    <div v-if="executing" style="text-align:center;color:white;font-size:16px;">
+      <div style="padding:20px;">正在登录...</div>
+    </div>
+    <form id="f1" v-if="!executing" @keyup.enter="login()" onsubmit="return false">
+      <div class="row">
+        <div class="welcome"></div>
+      </div>
+      <div class="row">
+        <el-input placeholder="用户名" v-model="userName" autofocus>
+          <template slot="prepend">
+            <span class="prepend fa fa-user" height="28"></span>
+          </template>
+        </el-input>
+      </div>
+      <div class="row">
+        <el-input placeholder="密码" type="password" v-model="password">
+          <template slot="prepend">
+            <span class="prepend fa fa-lock" height="28"></span>
+          </template>
+        </el-input>
+      </div>
+      <div class="row" style="text-align:right">
+        <el-button type="success" size="middle" @click="login()"> 登录</el-button>
+        <el-button type="warning" size="middle" @click="reset()"> 重置</el-button>
+      </div>
+    </form>
+  </div>
+  <div class="appender"></div>
+  <div v-if="editPwdModal">
+    <edit-pwd-dialog :edit-pwd-modal="editPwdModal" :modal-title="modalTitle" :user-name="userName"></edit-pwd-dialog>
+  </div>
+  <div class="license-info" v-html="licenseData.licenseWarning"></div>
+</div>
+<script type="text/javascript">
+  // 后台系统强制使用chrome浏览器
+  var ua = navigator.userAgent.toLowerCase()
+  if (!ua.match(/chrome\/([\d.]+)/)) {
+    window.location.href = "./forchrome.html"
+  }
+</script>
+
+<script src="./lib/lodash.min.js"></script>
+<script src="./lib/polyfill.min.js"></script>
+<script src="./lib/axios.min.js"></script>
+<script src="./lib/axios-mock-adapter.min.js"></script>
+<script src="./lib/vue.js"></script>
+<script src="./lib/vue-router.min.js"></script>
+<script src="./lib/element-ui-4.5.0.js"></script>
+<script src="./lib/vue-i18n.min.js"></script>
+<script src="./login.js?[replace by time]"></script>
+</body>
+
+</html>
